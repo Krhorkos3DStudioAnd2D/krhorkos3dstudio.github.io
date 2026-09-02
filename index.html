@@ -12,7 +12,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
-
         :root {
             --fondo-oscuro: #0f0f1a;
             --fondo-card: #1a1a2e;
@@ -23,13 +22,11 @@
             --borde: #2e2e4a;
             --brillo: rgba(108, 92, 231, 0.3);
         }
-
         body {
             background: linear-gradient(135deg, var(--fondo-oscuro), #1a1a2e);
             color: var(--texto);
             min-height: 100vh;
         }
-
         .pantalla-bienvenida {
             height: 100vh;
             display: flex;
@@ -40,7 +37,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .particulas {
             position: absolute;
             width: 100%;
@@ -52,22 +48,18 @@
             background-size: 80px 80px;
             animation: fondo-mueve 20s linear infinite;
         }
-
         @keyframes fondo-mueve {
             0% { transform: translate(0, 0); }
             100% { transform: translate(80px, 80px); }
         }
-
         .bienvenida-contenido {
             z-index: 1;
             animation: aparecer 1.5s ease-out;
         }
-
         @keyframes aparecer {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         h1 {
             font-size: clamp(2.5rem, 6vw, 4rem);
             background: linear-gradient(90deg, var(--primario), var(--secundario));
@@ -76,14 +68,12 @@
             background-clip: text;
             margin-bottom: 1rem;
         }
-
         .subtitulo {
             font-size: clamp(1.1rem, 2.5vw, 1.5rem);
             color: var(--texto-claro);
             margin-bottom: 3rem;
             max-width: 600px;
         }
-
         .boton-entrar {
             padding: 1rem 3rem;
             font-size: 1.2rem;
@@ -95,12 +85,10 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 20px var(--brillo);
         }
-
         .boton-entrar:hover {
             transform: scale(1.08);
             box-shadow: 0 0 40px var(--primario);
         }
-
         .navegacion {
             position: sticky;
             top: 0;
@@ -111,11 +99,9 @@
             z-index: 100;
             display: none;
         }
-
         .navegacion.mostrar {
             display: block;
         }
-
         .nav-lista {
             list-style: none;
             display: flex;
@@ -123,7 +109,6 @@
             gap: 2rem;
             flex-wrap: wrap;
         }
-
         .nav-enlace {
             color: var(--texto-claro);
             text-decoration: none;
@@ -132,31 +117,25 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-
         .nav-enlace:hover {
             color: white;
             background: var(--brillo);
         }
-
         .oculto { display: none; }
-
         .contenedor-principal {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
             display: none;
         }
-
         .contenedor-principal.mostrar {
             display: block;
             animation: aparecer 0.8s ease-out;
         }
-
         .seccion {
             margin-bottom: 5rem;
             padding-top: 2rem;
         }
-
         h2 {
             font-size: 2rem;
             color: var(--secundario);
@@ -164,13 +143,11 @@
             border-bottom: 2px solid var(--borde);
             padding-bottom: 0.5rem;
         }
-
         .cuadricula {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-
         .tarjeta {
             background: var(--fondo-card);
             border: 1px solid var(--borde);
@@ -178,24 +155,20 @@
             padding: 1.5rem;
             transition: all 0.3s ease;
         }
-
         .tarjeta:hover {
             border-color: var(--primario);
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(108, 92, 231, 0.15);
         }
-
         .tarjeta h3 {
             color: var(--primario);
             margin-bottom: 0.5rem;
         }
-
         .tarjeta p {
             color: var(--texto-claro);
             font-size: 0.95rem;
             margin-bottom: 1rem;
         }
-
         .boton-descarga {
             display: inline-block;
             padding: 0.6rem 1.2rem;
@@ -206,12 +179,42 @@
             font-weight: 500;
             transition: all 0.3s ease;
         }
-
         .boton-descarga:hover {
             background: var(--secundario);
             color: #000;
         }
-
+        .caja-redes {
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .cuadricula-redes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .boton-red {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.2rem;
+            background: linear-gradient(135deg, #2e2e4a, #1a1a2e);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .boton-red:hover {
+            border-color: var(--primario);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.2);
+        }
         .caja-donacion {
             background: linear-gradient(135deg, #2e1065, #1e3a5f);
             border-radius: 16px;
@@ -219,7 +222,6 @@
             text-align: center;
             border: 1px solid var(--primario);
         }
-
         .boton-donar {
             display: inline-block;
             margin-top: 1.2rem;
@@ -232,12 +234,10 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
         }
-
         .boton-donar:hover {
             transform: scale(1.05);
             box-shadow: 0 0 25px rgba(231, 76, 60, 0.4);
         }
-
         .caja-creditos {
             background: var(--fondo-card);
             border: 1px solid var(--borde);
@@ -246,11 +246,9 @@
             line-height: 1.8;
             color: var(--texto-claro);
         }
-
         .caja-creditos strong {
             color: var(--secundario);
         }
-
         footer {
             text-align: center;
             padding: 2rem;
@@ -261,12 +259,11 @@
     </style>
 </head>
 <body>
-
     <div id="pantalla-bienvenida" class="pantalla-bienvenida">
         <div class="particulas"></div>
         <div class="bienvenida-contenido">
             <h1>🎮 Krhorkos3DStudioAnd2D</h1>
-            <p class="subtitulo">Desarrollando mundos, experiencias y sueños en 3D y 2D.<br>Bienvenido a mi espacio.</p>
+            <p class="subtitulo">Desarrollador indie<br> SilentBlock recientemente lanzado</p>
             <button class="boton-entrar" onclick="entrarSitio()">Entrar al Sitio</button>
         </div>
     </div>
@@ -276,29 +273,30 @@
             <li><a href="#juegos" class="nav-enlace">🎮 Juegos</a></li>
             <li><a href="#assets3d" class="nav-enlace">🧊 Assets 3D</a></li>
             <li><a href="#assets2d" class="nav-enlace">🎨 Assets 2D</a></li>
+            <li><a href="#redes" class="nav-enlace">🔗 Redes Sociales</a></li>
             <li><a href="#donaciones" class="nav-enlace">❤️ Donaciones</a></li>
             <li><a href="#creditos" class="nav-enlace">⭐ Créditos</a></li>
         </ul>
     </nav>
 
-
     <main id="contenido" class="contenedor-principal">
-
         <!-- SECCIÓN: JUEGOS -->
         <section id="juegos" class="seccion">
             <h2>🎮 Mis Juegos</h2>
             <div class="cuadricula">
-                <!-- TARJETA DE JUEGO 1 -->
+
+                <!-- AGREGAR MAS JUEGOS AQUI CON EL MISMO CODIGO -------------------------------------------------------------------------------------------------------------------------------------------------->
                 <div class="tarjeta">
                     <h3>SilentBlock</h3>
-                    <p>Juego de terror psicológico. Encuentra la llave y escapa de la casa antes de que sea demasiado tarde...</p>
+                    <p>Juego de terror psicológico. Encuentra la llave y escapa de la casa.</p>
                     <a href="https://alex293517.itch.io/silentblock-10" target="_blank" class="boton-descarga">⬇️ Descargar / Ver</a>
                 </div>
 
-                <!-- AGREGAR MAS JUEGOS AQUI -->
+
+                
                 <div class="tarjeta">
                     <h3>Próximamente...</h3>
-                    <p>Nuevos proyectos en desarrollo. ¡Pronto más noticias!</p>
+                    <p>Nuevos proyectos en desarrollo. ¡Pronto más noticias en itch.io!</p>
                     <span style="color:gray;">Disponible pronto</span>
                 </div>
             </div>
@@ -313,7 +311,6 @@
                     <p>Modelos listos para usar en tus proyectos. Gratis y libres.</p>
                     <span style="color:gray;">Próximamente</span>
                 </div>
-                <!-- AGREGAR MÁS ASSETS 3D AQUÍ -->
             </div>
         </section>
 
@@ -326,7 +323,22 @@
                     <p>Texturas, íconos y gráficos 2D para tus proyectos.</p>
                     <span style="color:gray;">Próximamente</span>
                 </div>
-                <!-- AGREGAR MÁS ASSETS 2D AQUÍ -->
+            </div>
+        </section>
+
+        <!-- ✅ SECCIÓN NUEVA: REDES SOCIALES -->
+        <section id="redes" class="seccion">
+            <h2>🔗 Sígueme en Redes Sociales</h2>
+            <div class="caja-redes">
+                <p>¡Sígueme para estar al tanto de novedades, avances y próximos proyectos! 🚀</p>
+                <div class="cuadricula-redes">
+                    <a href="#" target="_blank" class="boton-red">📷 Instagram</a>
+                    <a href="https://alex293517.itch.io" target="_blank" class="boton-red">🎮 Itch.io</a>
+                    <a href="https://github.com/Krhorkos3DStudioAnd2D" target="_blank" class="boton-red">🐙 GitHub</a>
+                    <a href="#" target="_blank" class="boton-red">🐦 X / Twitter</a>
+                    <a href="#" target="_blank" class="boton-red">📺 YouTube</a>
+                    <a href="#" target="_blank" class="boton-red">💬 Discord</a>
+                </div>
             </div>
         </section>
 
@@ -336,12 +348,11 @@
             <div class="caja-donacion">
                 <h3>Tu apoyo me ayuda a seguir creando 💜</h3>
                 <p>Si disfrutas de mis proyectos y quieres ayudarme a seguir mejorando y creando más contenido, cualquier aportación es infinitamente agradecida. Gracias por creer en mi trabajo.</p>
-                <!-- ENLACE DE DONACIONES -->
                 <a href="#" class="boton-donar">💜 Donar aquí</a>
             </div>
         </section>
 
-        <!-- SECCIÓN: CRÉDITOS Y AGRADECIMIENTO -->
+        <!-- SECCIÓN: CRÉDITOS -->
         <section id="creditos" class="seccion">
             <h2>⭐ Créditos y Agradecimientos</h2>
             <div class="caja-creditos">
@@ -354,28 +365,19 @@
             </div>
         </section>
 
-        <!-- PIE DE PÁGINA -->
         <footer>
             <p>© 2026 Krhorkos3DStudioAnd2D — Todos los derechos reservados</p>
             <p style="margin-top:0.5rem; font-size:0.9rem;">Sitio creado por mí, paso a paso, con esfuerzo y cariño.</p>
         </footer>
-
     </main>
 
-    <!-- ====================================== -->
-    <!-- JAVASCRIPT                             -->
-    <!-- ====================================== -->
     <script>
         function entrarSitio() {
-            // Ocultar pantalla de bienvenida
             document.getElementById("pantalla-bienvenida").classList.add("oculto");
-            // Mostrar navegación y contenido
             document.getElementById("navegacion").classList.add("mostrar");
             document.getElementById("contenido").classList.add("mostrar");
-            // Llevar arriba
             window.scrollTo(0, 0);
         }
     </script>
-
 </body>
 </html>

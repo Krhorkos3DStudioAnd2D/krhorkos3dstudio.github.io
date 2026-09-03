@@ -1,3 +1,5 @@
+embedId: "REEMPLAZA_CON_TU_ID" ESTE ES EL CODIGO:
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -56,16 +58,6 @@
             --texto-claro: #8ea0ac;
             --borde: #223039;
             --brillo: rgba(46, 204, 113, 0.25);
-        }
-        html[data-tema="negro-neon"] {
-            --fondo-oscuro: #050508;
-            --fondo-card: #0f0f18;
-            --primario: #ff00ff;
-            --secundario: #00ffff;
-            --texto: #f0f0ff;
-            --texto-claro: #9999cc;
-            --borde: #220033;
-            --brillo: rgba(255, 0, 255, 0.25);
         }
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -157,7 +149,7 @@
             z-index: 100;
             display: none;
         }
-        html[data-tema="claro"] .navegacion { background: rgba(255,255,255,0.92); }
+        html[data-tema="claro"] .navegacion { background: rgba(255, 255, 255, 0.92); }
         .navegacion.mostrar { display: block; }
         .nav-lista {
             list-style: none;
@@ -411,6 +403,7 @@
             color: var(--texto-claro);
         }
         .caja-creditos strong { color: var(--secundario); }
+        /* SECCIÓN DE PERSONALIZACIÓN (visible en la página, no solo el botón flotante) */
         .caja-personalizacion {
             background: var(--fondo-card);
             border: 1px solid var(--borde);
@@ -444,7 +437,6 @@
         .tarjeta-tema[data-valor="claro"] .muestra-tema { background: linear-gradient(135deg, #6c5ce7, #f2f2f7); }
         .tarjeta-tema[data-valor="sangre"] .muestra-tema { background: linear-gradient(135deg, #c0392b, #e67e22); }
         .tarjeta-tema[data-valor="abismo"] .muestra-tema { background: linear-gradient(135deg, #2ecc71, #3498db); }
-        .tarjeta-tema[data-valor="negro-neon"] .muestra-tema { background: linear-gradient(135deg, #ff00ff, #00ffff); }
         .tarjeta-tema span { color: var(--texto); font-size: 0.9rem; font-weight: 500; }
         footer {
             text-align: center;
@@ -498,7 +490,6 @@
         .opcion-tema[data-valor="claro"] { background: linear-gradient(135deg, #6c5ce7, #f2f2f7); }
         .opcion-tema[data-valor="sangre"] { background: linear-gradient(135deg, #c0392b, #e67e22); }
         .opcion-tema[data-valor="abismo"] { background: linear-gradient(135deg, #2ecc71, #3498db); }
-        .opcion-tema[data-valor="negro-neon"] { background: linear-gradient(135deg, #ff00ff, #00ffff); }
         .opcion-tema.seleccionada { border-color: var(--texto); }
     </style>
 </head>
@@ -508,7 +499,7 @@
         <div class="particulas"></div>
         <div class="bienvenida-contenido">
             <h1>🎮 Krhorkos3DStudioAnd2D</h1>
-            <p class="subtitulo">Desarrollador indie<br>SilentBlock recientemente lanzado</p>
+            <p class="subtitulo">Desarrollador indie<br> SilentBlock recientemente lanzado</p>
             <button class="boton-entrar" onclick="entrarSitio()">Entrar al Sitio</button>
         </div>
     </div>
@@ -528,22 +519,27 @@
         </ul>
     </nav>
     <main id="contenido" class="contenedor-principal">
+        <!-- SECCIÓN: JUEGOS (se rellena desde CONFIG.juegos, más abajo en el <script>) -->
         <section id="juegos" class="seccion">
             <h2>🎮 Mis Juegos</h2>
             <div class="cuadricula" id="gridJuegos"></div>
         </section>
+        <!-- SECCIÓN: SOBRE MÍ (texto en CONFIG.sobreMi) -->
         <section id="sobre-mi" class="seccion">
             <h2>👤 Sobre mí</h2>
             <div class="sobre-mi" id="textoSobreMi"></div>
         </section>
+        <!-- SECCIÓN: DEVLOG (entradas en CONFIG.devlog) -->
         <section id="devlog" class="seccion">
             <h2>📰 Devlog</h2>
             <div class="filtros-devlog" id="filtrosDevlog"></div>
             <div class="lista-devlog" id="listaDevlog"></div>
         </section>
+        <!-- SECCIÓN: ASSETS 3D -->
         <section id="assets3d" class="seccion">
             <h2>🧊 Recursos / Assets 3D</h2>
             <div class="cuadricula">
+                <!-- AGREGAR MAS ASSETS 3D AQUI, COPIANDO ESTA TARJETA ------------------------------------------------- -->
                 <div class="tarjeta">
                     <h3>Modelos 3D — Próximamente</h3>
                     <p>Modelos listos para usar en tus proyectos. Gratis y libres.</p>
@@ -551,9 +547,11 @@
                 </div>
             </div>
         </section>
+        <!-- SECCIÓN: ASSETS 2D -->
         <section id="assets2d" class="seccion">
             <h2>🎨 Recursos / Assets 2D</h2>
             <div class="cuadricula">
+                <!-- AGREGAR MAS ASSETS 2D AQUI, COPIANDO ESTA TARJETA ------------------------------------------------- -->
                 <div class="tarjeta">
                     <h3>Recursos 2D — Próximamente</h3>
                     <p>Texturas, íconos y gráficos 2D para tus proyectos.</p>
@@ -561,6 +559,7 @@
                 </div>
             </div>
         </section>
+        <!-- SECCIÓN: CONTACTO (correo y Formspree ID salen de CONFIG) -->
         <section id="contacto" class="seccion">
             <h2>✉️ Contacto</h2>
             <div class="caja-contacto">
@@ -585,7 +584,7 @@
                         <label for="mensaje">Mensaje</label>
                         <textarea id="mensaje" name="mensaje" required placeholder="Si es un bug, incluye: qué juego, qué pasó y en qué parte del juego estabas."></textarea>
                     </div>
-                    <button type="submit" class="boton-enviar">Enviar mensaje</button>
+                    <button type="submit" class="boton-enviar" data-goatcounter-click="click-enviar-contacto">Enviar mensaje</button>
                 </form>
                 <div class="atajos-contacto">
                     <a class="atajo-contacto" data-correo-asunto="Contacto directo" href="#">📧 Escribirme directo</a>
@@ -594,6 +593,7 @@
                 </div>
             </div>
         </section>
+        <!-- SECCIÓN: REDES SOCIALES (links en CONFIG.redes) -->
         <section id="redes" class="seccion">
             <h2>🔗 Sígueme en Redes Sociales</h2>
             <div class="caja-redes">
@@ -601,46 +601,67 @@
                 <div class="cuadricula-redes" id="gridRedes"></div>
             </div>
         </section>
+        <!-- SECCIÓN: DONACIONES (link en CONFIG.donacionUrl) -->
         <section id="donaciones" class="seccion">
             <h2>❤️ Apóyame / Donaciones</h2>
             <div class="caja-donacion">
                 <h3>Tu apoyo me ayuda a seguir creando 💜</h3>
-                <p>Si disfrutas de mis proyectos y quieres ayudarme a seguir mejorando y creando más contenido, cualquier aportación es infinitamente agradecida.</p>
-                <a href="#" id="enlaceDonar" class="boton-donar">💜 Donar aquí</a>
+                <p>Si disfrutas de mis proyectos y quieres ayudarme a seguir mejorando y creando más contenido, cualquier aportación es infinitamente agradecida. Gracias por creer en mi trabajo.</p>
+                <a href="#" id="enlaceDonar" class="boton-donar" data-goatcounter-click="click-donar">💜 Donar aquí</a>
             </div>
         </section>
+        <!-- SECCIÓN: PERSONALIZACIÓN (visible en el sitio, además del botón flotante 🎨) -->
         <section id="personalizacion" class="seccion">
-            <h2>🎨 Personalizar Sitio</h2>
+            <h2>🎨 Personalizar el Sitio</h2>
             <div class="caja-personalizacion">
-                <p>Elige el tema de color con el que quieres ver el sitio. Se guarda en tu navegador.</p>
-                <div class="cuadricula-temas" id="cuadriculaTemas"></div>
+                <p>Elige el tema de color con el que quieres ver el sitio. Se guarda en tu navegador, así que la próxima vez que entres seguirá igual.</p>
+                <div class="cuadricula-temas" id="cuadriculaTemas">
+                    <!-- Se rellena con JS desde CONFIG.temas. Para agregar un tema nuevo, ver comentario junto a CONFIG.temas -->
+                </div>
             </div>
         </section>
+        <!-- SECCIÓN: CRÉDITOS -->
         <section id="creditos" class="seccion">
             <h2>⭐ Créditos y Agradecimientos</h2>
             <div class="caja-creditos">
                 <p><strong>Krhorkos3DStudioAnd2D</strong> — Un proyecto hecho por una sola persona, con mucho esfuerzo y dedicación.</p>
-                <p><em>--- Krhorkos3DStudioAnd2D ---</em></p>
+                <br>
+                <p>Quiero agradecer de corazón a todas las personas que me han apoyado, de una forma u otra, para que pueda seguir creando. Cada descarga, cada visita y cada palabra de aliento me da fuerzas para continuar.</p>
+                <p>Especialmente a mi familia, por ser mi motor. Y a ti, por estar aquí y ver lo que hago.</p>
+                <br>
+                <p><em>— Hecho con 💜 por Óscar</em></p>
             </div>
         </section>
         <footer>
             <p>© 2026 Krhorkos3DStudioAnd2D — Todos los derechos reservados</p>
-            <p style="margin-top:0.5rem; font-size:0.9rem;">Sitio oficial de Krhorkos3DStudioAnd2D.</p>
+            <p style="margin-top:0.5rem; font-size:0.9rem;">Sitio creado por mí, paso a paso, con esfuerzo y cariño.</p>
         </footer>
     </main>
     <button class="boton-arriba" id="botonArriba" aria-label="Volver arriba">↑</button>
     <button class="boton-temas" id="botonTemas" aria-label="Cambiar tema" aria-expanded="false">🎨</button>
     <div class="panel-temas" id="panelTemas"></div>
     <script>
+        // ======================================================================
+        // CONFIGURACIÓN DEL SITIO — TODO LO QUE NORMALMENTE VAS A EDITAR VA AQUÍ.
+        // No necesitas tocar el HTML de arriba ni el CSS para agregar cosas.
+        // ======================================================================
         const CONFIG = {
+            // Tu correo de contacto (ya puesto)
             correo: "krhorkos3dstudioand2d@gmail.com",
-            formspreeId: "xrpglznl",
-            // ⬇️ PONER MI USUARIO DE GOATCOUNTER AQUÍ
-            goatcounterUsuario: "",
-            // ⬇️ PONER MI ENLACE DE DONACIÓN (KO-FI / PAYPAL) AQUÍ
-            donacionUrl: "",
+            // ID de tu formulario de Formspree (gratis, sin backend propio).
+            // Créalo en https://formspree.io y pega aquí solo el ID.
+            formspreeId: "TU_ID_DE_FORMSPREE",
+            // Tu usuario de GoatCounter (analítica gratis y sin cookies).
+            // Créalo en https://www.goatcounter.com. Si lo dejas así, no carga
+            // nada de analítica (no rompe el sitio).
+            goatcounterUsuario: "TUUSUARIO",
+            // Link de donación (Ko-fi, PayPal.me, itch.io, etc.)
+            donacionUrl: "#",
+            // ---------- REDES SOCIALES ----------
+            // Deja "" en las que no uses todavía; el botón no aparece si está vacío.
+            // AGREGAR UNA RED NUEVA: agrega una línea aquí Y agrega su etiqueta en
+            // ETIQUETAS_REDES más abajo (buscar "AGREGAR ETIQUETA DE RED AQUI").
             redes: {
-                // ⬇️ PONER MIS ENLACES CUANDO TENGA LAS REDES FALTANTES---------------------------------------------------------------------------------------------------------------------------------------------
                 instagram: "",
                 itch: "https://alex293517.itch.io",
                 github: "https://github.com/Krhorkos3DStudioAnd2D",
@@ -648,25 +669,34 @@
                 youtube: "",
                 discord: ""
             },
+            // ---------- JUEGOS ----------
+            // AGREGAR UN JUEGO NUEVO: copiar el bloque { ... } de abajo y pégarlo
+            // dentro de los corchetes [ ]. embedId sale de itch.io → Edit game →
+            // Embed options (déjarlo "" si no quiero el reproductor embebido).
             juegos: [
                 {
                     nombre: "SilentBlock",
                     descripcion: "Juego de terror psicológico. Encuentra la llave y escapa de la casa.",
                     url: "https://alex293517.itch.io/silentblock-10",
-                    // ------------------------------------------------⬇️ PONER ID DE EMBED DE ITCH.IO AQUÍ --------------------------------------------------------------------------------------------------------------
-                    embedId: ""
+                    embedId: "REEMPLAZA_CON_TU_ID"
                 }
-                // ➕ AGREGAR MÁS JUEGOS COPIANDO EL BLOQUE DE ARRIBA
+                // { nombre: "Otro juego", descripcion: "...", url: "...", embedId: "" },
             ],
             textoProximamente: "Nuevos proyectos en desarrollo. ¡Pronto más noticias en itch.io!",
+            // ---------- SOBRE MÍ ----------
+            // Cada línea es un párrafo. Agregar o quitar líneas libremente no afecta tanto.
             sobreMi: [
-                "Soy Óscar, desarrollador indie detrás de Krhorkos3DStudioAnd2D. Trabajo solo en cada juego: diseño, programación, arte y sonido, principalmente en Godot 4.",
-                "Hago esto de corazón, con mucho esfuerzo y dedicación. Quizás en un futuro piense en crear también sitios web, es un pensamiento a futuro.",
-                "Cada proyecto que hago le pongo todo mi corazón. Gracias por tu apoyo."
+                "
+                "desarrollador indie detrás de Krhorkos3DStudioAnd2D. Trabajo solo en cada juego: diseño, programación, arte y sonido, principalmente en Godot 4.",
+                "Hago esto de corazon, quizas en un futuro haga una seccion para crear sitios web es un pensamiento a futuro"
             ],
+            // ---------- DEVLOG ----------
+            // AGREGAR UNA ENTRADA NUEVA: copia el bloque { ... } de abajo.
+            // categoria: "general" o el nombre del juego en minúsculas (debe
+            // coincidir con el "nombre" del juego de arriba, en minúsculas).
             devlog: [
                 {
-                    fecha: "1 de Septiembre 2026",
+                    fecha: "2026",
                     categoria: "silentblock",
                     titulo: "Lanzamiento de SilentBlock",
                     texto: "SilentBlock ya está disponible en itch.io. Gracias a quienes lo probaron durante el desarrollo."
@@ -675,25 +705,30 @@
                     fecha: "Próximamente",
                     categoria: "general",
                     titulo: "Nuevo proyecto en camino",
-                    texto: "Estoy empezando un nuevo juego. Iré compartiendo avances aquí antes que en cualquier otro lado.",
+                    texto: "Estoy empezando un nuevo juego. Iré compartiendo avances aquí antes que en cualquier otro lado."
                 }
-                // ➕ AGREGA MÁS ENTRADAS DE DEVLOG COPIANDO EL BLOQUE DE ARRIBA
+                // { fecha: "...", categoria: "...", titulo: "...", texto: "..." },
             ],
+            // ---------- TEMAS DE PERSONALIZACIÓN ----------
+            // AGREGAR UN TEMA NUEVO: 1) agrega un bloque aquí con un "valor" único,
+            // 2) agrega su paleta de colores en el CSS de arriba copiando un bloque
+            // html[data-tema="..."] { ... } y agregando ese mismo valor.
             temas: [
                 { valor: "oscuro", nombre: "Oscuro (original)" },
                 { valor: "claro", nombre: "Claro" },
-                { valor: "sangre", nombre: "Sangre" },
-                { valor: "abismo", nombre: "Abismo" },
-                { valor: "negro-neon", nombre: "Negro Neón" }
+                { valor: "rojo", nombre: "Rojo" },
+                { valor: "abismo", nombre: "Abismo" }
+                { valor: "negro neon, nombre: "Negro Neon"}
             ]
         };
+        // ======================================================================
+        // REDES SOCIALES
+        // ======================================================================
         const ETIQUETAS_REDES = {
             instagram: "📷 Instagram",
             itch: "🎮 Itch.io",
             github: "🐙 GitHub",
-            twitter: "🐦 X / Twitter",
-            youtube: "📺 YouTube",
-            discord: "💬 Discord"
+            // AGREGAR ETIQUETA DE RED AQUI: clave_en_config: "🔵 Nombre a mostrar",
         };
         function nombreCategoria(cat) {
             if (cat === "general") return "General";
@@ -705,7 +740,7 @@
                 <div class="tarjeta">
                     <h3>${juego.nombre}</h3>
                     <p>${juego.descripcion}</p>
-                    <a href="${juego.url}" target="_blank" class="boton-descarga">⬇️ Descargar / Ver</a>
+                    <a href="${juego.url}" target="_blank" class="boton-descarga" data-goatcounter-click="click-descarga-${juego.nombre.toLowerCase().replace(/\s+/g, "-")}">⬇️ Descargar / Ver</a>
                     ${juego.embedId ? `
                     <div class="embed-itch">
                         <iframe frameborder="0" src="https://itch.io/embed/${juego.embedId}?linkback=true" width="100%" height="167" title="Reproductor de itch.io para ${juego.nombre}" loading="lazy"></iframe>
@@ -761,13 +796,14 @@
             document.getElementById("enlaceDonar").href = CONFIG.donacionUrl;
         }
         function cargarAnalitica() {
-            if (!CONFIG.goatcounterUsuario) return;
+            if (!CONFIG.goatcounterUsuario || CONFIG.goatcounterUsuario === "TUUSUARIO") return;
             const script = document.createElement("script");
             script.async = true;
             script.src = "//gc.zgo.at/count.js";
             script.setAttribute("data-goatcounter", `https://${CONFIG.goatcounterUsuario}.goatcounter.com/count`);
             document.head.appendChild(script);
         }
+        // ===================== TEMAS / PERSONALIZACIÓN =====================
         function aplicarTema(valor) {
             document.documentElement.setAttribute("data-tema", valor);
             localStorage.setItem("tema-sitio", valor);
@@ -775,9 +811,11 @@
             document.querySelectorAll(".tarjeta-tema").forEach(t => t.classList.toggle("seleccionado", t.dataset.valor === valor));
         }
         function renderizarTemas() {
+            // Botón flotante (versión compacta)
             document.getElementById("panelTemas").innerHTML = CONFIG.temas.map(t =>
                 `<button class="opcion-tema" data-valor="${t.valor}" title="${t.nombre}"></button>`
             ).join("");
+            // Sección visible de personalización (versión completa, con nombre)
             document.getElementById("cuadriculaTemas").innerHTML = CONFIG.temas.map(t => `
                 <div class="tarjeta-tema" data-valor="${t.valor}">
                     <div class="muestra-tema"></div>
@@ -802,6 +840,7 @@
                 botonTemas.setAttribute("aria-expanded", abierto);
             });
         }
+        // ===================== ENTRAR AL SITIO =====================
         function entrarSitio() {
             document.getElementById("pantalla-bienvenida").classList.add("oculto");
             document.getElementById("navegacion").classList.add("mostrar");
@@ -811,6 +850,7 @@
             renderizarDevlog("todos");
             iniciarObservadores();
         }
+        // ===================== MENÚ MÓVIL =====================
         function iniciarMenuMovil() {
             const botonMenu = document.getElementById("botonMenu");
             const listaNav = document.getElementById("listaNav");
@@ -825,6 +865,7 @@
                 });
             });
         }
+        // ===================== BOTÓN VOLVER ARRIBA =====================
         function iniciarBotonArriba() {
             const botonArriba = document.getElementById("botonArriba");
             window.addEventListener("scroll", () => {
@@ -832,6 +873,7 @@
             });
             botonArriba.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
         }
+        // ===================== APARICIÓN DE SECCIONES + NAV ACTIVO =====================
         function iniciarObservadores() {
             const secciones = document.querySelectorAll(".seccion");
             const enlacesNav = document.querySelectorAll(".nav-enlace");
@@ -850,6 +892,7 @@
             }, { threshold: 0.5 });
             secciones.forEach(s => observadorActivo.observe(s));
         }
+        // ===================== ARRANQUE =====================
         document.addEventListener("DOMContentLoaded", () => {
             renderizarJuegos();
             renderizarRedes();

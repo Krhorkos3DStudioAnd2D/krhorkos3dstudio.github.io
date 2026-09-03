@@ -745,7 +745,7 @@
         <section id="contacto" class="seccion">
             <h2>✉️ Contacto</h2>
             <div class="caja-contacto">
-                <form id="formularioContacto" method="POST">
+                <form id="formularioContacto" action="https://formspree.io/f/xrpglznl" method="POST">
                     <div class="campo">
                         <label for="motivo">Motivo</label>
                         <select id="motivo" name="motivo" required>
@@ -771,9 +771,9 @@
                     <div id="mensajeEnviado" class="mensaje-form-enviado">✅ ¡Mensaje enviado correctamente! Gracias por escribirme. Te responderé lo antes posible.</div>
                 </form>
                 <div class="atajos-contacto">
-                    <a class="atajo-contacto" data-correo-asunto="Contacto desde el sitio web" href="#">📧 Escríbeme directo por correo</a>
-                    <a class="atajo-contacto" data-correo-asunto="Propuesta de colaboración" href="#">🤝 Proponer colaboración</a>
-                    <a class="atajo-contacto" data-correo-asunto="Reporte de bug" href="#">🐞 Reportar un error o bug</a>
+                    <a class="atajo-contacto" data-correo-asunto="Contacto desde el sitio web" href="mailto:krhorkos3dstudioand2d@gmail.com?subject=Contacto desde el sitio web">📧 Escríbeme directo por correo</a>
+                    <a class="atajo-contacto" data-correo-asunto="Propuesta de colaboración" href="mailto:krhorkos3dstudioand2d@gmail.com?subject=Propuesta de colaboración">🤝 Proponer colaboración</a>
+                    <a class="atajo-contacto" data-correo-asunto="Reporte de bug" href="mailto:krhorkos3dstudioand2d@gmail.com?subject=Reporte de bug">🐞 Reportar un error o bug</a>
                 </div>
             </div>
         </section>
@@ -791,7 +791,7 @@
             <div class="caja-donacion">
                 <h3>Tu apoyo me ayuda a seguir creando 💜</h3>
                 <p>Si disfrutas de mis proyectos y quieres ayudarme a seguir mejorando y creando más contenido, cualquier aportación es infinitamente agradecida. ¡Gracias por tu apoyo!</p>
-                <a href="#" id="enlaceDonar" class="boton-donar">💜 Quiero apoyar</a>
+                <a href="https://alex293517.itch.io/silentblock-10" target="_blank" class="boton-donar">💜 Quiero apoyar</a>
             </div>
         </section>
 
@@ -817,8 +817,7 @@
         const CONFIG = {
             correo: "krhorkos3dstudioand2d@gmail.com",
             formspreeId: "xrpglznl",
-            goatcounterUsuario: "",
-            donacionUrl: "",
+            donacionUrl: "https://alex293517.itch.io/silentblock-10",
             redes: {
                 instagram: "",
                 itch: "https://alex293517.itch.io",
@@ -934,6 +933,4 @@
             const cont = document.getElementById("gridRedes");
             cont.innerHTML = Object.entries(CONFIG.redes)
                 .filter(([, url]) => url)
-                .map(([clave, url]) => `<a href="${url}" target="_blank" class="boton-red">${ETIQUETAS_REDES[clave] || clave}</a>`)
-                .join("");
-        }
+                .map((

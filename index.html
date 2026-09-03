@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krhorkos3DStudioAnd2D — Juegos y Recursos</title>
+    <meta name="description" content="Sitio de Krhorkos3DStudioAnd2D, estudio indie de una sola persona. Descarga SilentBlock, un juego de terror psicológico, y descubre próximos proyectos y assets 3D/2D.">
+    <meta property="og:title" content="Krhorkos3DStudioAnd2D">
+    <meta property="og:description" content="Juegos indie y recursos 3D/2D hechos por una sola persona. Descarga SilentBlock ahora.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
     <style>
         * {
             margin: 0;
@@ -12,7 +17,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
-        :root {
+        :root, html[data-tema="oscuro"] {
             --fondo-oscuro: #0f0f1a;
             --fondo-card: #1a1a2e;
             --primario: #6c5ce7;
@@ -22,10 +27,69 @@
             --borde: #2e2e4a;
             --brillo: rgba(108, 92, 231, 0.3);
         }
+        html[data-tema="claro"] {
+            --fondo-oscuro: #f2f2f7;
+            --fondo-card: #ffffff;
+            --primario: #6c5ce7;
+            --secundario: #00a19a;
+            --texto: #1a1a2e;
+            --texto-claro: #54546a;
+            --borde: #dcdce6;
+            --brillo: rgba(108, 92, 231, 0.15);
+        }
+        html[data-tema="sangre"] {
+            --fondo-oscuro: #0a0505;
+            --fondo-card: #1c0f0f;
+            --primario: #c0392b;
+            --secundario: #e67e22;
+            --texto: #f5e6e6;
+            --texto-claro: #c9a8a8;
+            --borde: #3a1a1a;
+            --brillo: rgba(192, 57, 43, 0.3);
+        }
+        html[data-tema="abismo"] {
+            --fondo-oscuro: #0a0f14;
+            --fondo-card: #121a21;
+            --primario: #2ecc71;
+            --secundario: #3498db;
+            --texto: #e6edf3;
+            --texto-claro: #8ea0ac;
+            --borde: #223039;
+            --brillo: rgba(46, 204, 113, 0.25);
+        }
+        html[data-tema="negro-neon"] {
+            --fondo-oscuro: #050508;
+            --fondo-card: #0f0f18;
+            --primario: #ff00ff;
+            --secundario: #00ffff;
+            --texto: #f0f0ff;
+            --texto-claro: #9999cc;
+            --borde: #220033;
+            --brillo: rgba(255, 0, 255, 0.25);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
         body {
-            background: linear-gradient(135deg, var(--fondo-oscuro), #1a1a2e);
+            background: linear-gradient(135deg, var(--fondo-oscuro), var(--fondo-card));
             color: var(--texto);
             min-height: 100vh;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+        .enlace-saltar {
+            position: absolute;
+            left: -999px;
+            top: 0;
+            background: var(--primario);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0 0 8px 0;
+            z-index: 1000;
+        }
+        .enlace-saltar:focus { left: 0; }
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+            outline: 2px solid var(--secundario);
+            outline-offset: 3px;
         }
         .pantalla-bienvenida {
             height: 100vh;
@@ -52,10 +116,7 @@
             0% { transform: translate(0, 0); }
             100% { transform: translate(80px, 80px); }
         }
-        .bienvenida-contenido {
-            z-index: 1;
-            animation: aparecer 1.5s ease-out;
-        }
+        .bienvenida-contenido { z-index: 1; animation: aparecer 1.5s ease-out; }
         @keyframes aparecer {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -85,10 +146,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 20px var(--brillo);
         }
-        .boton-entrar:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 40px var(--primario);
-        }
+        .boton-entrar:hover { transform: scale(1.08); box-shadow: 0 0 40px var(--primario); }
         .navegacion {
             position: sticky;
             top: 0;
@@ -99,14 +157,13 @@
             z-index: 100;
             display: none;
         }
-        .navegacion.mostrar {
-            display: block;
-        }
+        html[data-tema="claro"] .navegacion { background: rgba(255,255,255,0.92); }
+        .navegacion.mostrar { display: block; }
         .nav-lista {
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.6rem;
             flex-wrap: wrap;
         }
         .nav-enlace {
@@ -117,9 +174,32 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-        .nav-enlace:hover {
-            color: white;
+        .nav-enlace:hover { color: var(--texto); background: var(--brillo); }
+        .nav-enlace.activo {
+            color: var(--texto);
             background: var(--brillo);
+            box-shadow: inset 0 -2px 0 var(--secundario);
+        }
+        .boton-hamburguesa {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--texto);
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 0.3rem 0.8rem;
+        }
+        @media (max-width: 700px) {
+            .boton-hamburguesa { display: block; margin: 0 auto; }
+            .nav-lista {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease;
+            }
+            .nav-lista.abierto { max-height: 500px; margin-top: 1rem; }
         }
         .oculto { display: none; }
         .contenedor-principal {
@@ -128,14 +208,15 @@
             padding: 2rem;
             display: none;
         }
-        .contenedor-principal.mostrar {
-            display: block;
-            animation: aparecer 0.8s ease-out;
-        }
+        .contenedor-principal.mostrar { display: block; animation: aparecer 0.8s ease-out; }
         .seccion {
             margin-bottom: 5rem;
             padding-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+        .seccion.visible { opacity: 1; transform: translateY(0); }
         h2 {
             font-size: 2rem;
             color: var(--secundario);
@@ -160,15 +241,8 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(108, 92, 231, 0.15);
         }
-        .tarjeta h3 {
-            color: var(--primario);
-            margin-bottom: 0.5rem;
-        }
-        .tarjeta p {
-            color: var(--texto-claro);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
+        .tarjeta h3 { color: var(--primario); margin-bottom: 0.5rem; }
+        .tarjeta p { color: var(--texto-claro); font-size: 0.95rem; margin-bottom: 1rem; }
         .boton-descarga {
             display: inline-block;
             padding: 0.6rem 1.2rem;
@@ -179,10 +253,103 @@
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        .boton-descarga:hover {
-            background: var(--secundario);
-            color: #000;
+        .boton-descarga:hover { background: var(--secundario); color: #000; }
+        .embed-itch { margin-top: 1rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--borde); }
+        .embed-itch iframe { width: 100%; border: none; display: block; }
+        .sobre-mi {
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 2rem;
+            color: var(--texto-claro);
+            line-height: 1.8;
         }
+        .filtros-devlog { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+        .boton-filtro {
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            color: var(--texto-claro);
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .boton-filtro:hover { border-color: var(--primario); color: var(--texto); }
+        .boton-filtro.activo { background: var(--primario); border-color: var(--primario); color: white; }
+        .lista-devlog { display: flex; flex-direction: column; gap: 1.2rem; }
+        .entrada-devlog {
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 1.4rem 1.6rem;
+        }
+        .entrada-devlog .encabezado-devlog {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .entrada-devlog h3 { color: var(--primario); }
+        .etiqueta-devlog {
+            font-size: 0.78rem;
+            color: var(--secundario);
+            border: 1px solid var(--borde);
+            padding: 0.15rem 0.7rem;
+            border-radius: 50px;
+            align-self: flex-start;
+        }
+        .fecha-devlog { color: var(--texto-claro); font-size: 0.85rem; }
+        .entrada-devlog p { color: var(--texto-claro); line-height: 1.6; }
+        .caja-contacto {
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .campo { margin-bottom: 1.2rem; }
+        .campo label { display: block; margin-bottom: 0.4rem; color: var(--texto-claro); font-size: 0.9rem; }
+        .campo input, .campo select, .campo textarea {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            background: var(--fondo-oscuro);
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            color: var(--texto);
+            font-size: 0.95rem;
+        }
+        .campo textarea { resize: vertical; min-height: 120px; }
+        .boton-enviar {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(90deg, var(--primario), var(--secundario));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .boton-enviar:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--brillo); }
+        .atajos-contacto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .atajo-contacto {
+            display: block;
+            text-align: center;
+            padding: 0.9rem;
+            border: 1px solid var(--borde);
+            border-radius: 10px;
+            color: var(--texto-claro);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .atajo-contacto:hover { border-color: var(--secundario); color: var(--texto); }
         .caja-redes {
             background: var(--fondo-card);
             border: 1px solid var(--borde);
@@ -202,13 +369,13 @@
             justify-content: center;
             gap: 0.6rem;
             padding: 0.9rem 1.2rem;
-            background: linear-gradient(135deg, #2e2e4a, #1a1a2e);
-            color: white;
+            background: linear-gradient(135deg, var(--fondo-card), var(--fondo-oscuro));
+            color: var(--texto);
             text-decoration: none;
             border-radius: 10px;
             font-weight: 500;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
+            border: 1px solid var(--borde);
         }
         .boton-red:hover {
             border-color: var(--primario);
@@ -234,10 +401,7 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
         }
-        .boton-donar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(231, 76, 60, 0.4);
-        }
+        .boton-donar:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(231, 76, 60, 0.4); }
         .caja-creditos {
             background: var(--fondo-card);
             border: 1px solid var(--borde);
@@ -246,9 +410,42 @@
             line-height: 1.8;
             color: var(--texto-claro);
         }
-        .caja-creditos strong {
-            color: var(--secundario);
+        .caja-creditos strong { color: var(--secundario); }
+        .caja-personalizacion {
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 2rem;
         }
+        .caja-personalizacion > p { color: var(--texto-claro); margin-bottom: 1.5rem; }
+        .cuadricula-temas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+        .tarjeta-tema {
+            background: var(--fondo-oscuro);
+            border: 2px solid var(--borde);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .tarjeta-tema:hover { border-color: var(--primario); transform: translateY(-3px); }
+        .tarjeta-tema.seleccionado { border-color: var(--secundario); box-shadow: 0 0 15px var(--brillo); }
+        .muestra-tema {
+            width: 100%;
+            height: 44px;
+            border-radius: 8px;
+            margin-bottom: 0.7rem;
+        }
+        .tarjeta-tema[data-valor="oscuro"] .muestra-tema { background: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        .tarjeta-tema[data-valor="claro"] .muestra-tema { background: linear-gradient(135deg, #6c5ce7, #f2f2f7); }
+        .tarjeta-tema[data-valor="sangre"] .muestra-tema { background: linear-gradient(135deg, #c0392b, #e67e22); }
+        .tarjeta-tema[data-valor="abismo"] .muestra-tema { background: linear-gradient(135deg, #2ecc71, #3498db); }
+        .tarjeta-tema[data-valor="negro-neon"] .muestra-tema { background: linear-gradient(135deg, #ff00ff, #00ffff); }
+        .tarjeta-tema span { color: var(--texto); font-size: 0.9rem; font-weight: 500; }
         footer {
             text-align: center;
             padding: 2rem;
@@ -256,128 +453,423 @@
             color: var(--texto-claro);
             margin-top: 3rem;
         }
+        .boton-arriba, .boton-temas {
+            position: fixed;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        .boton-arriba { bottom: 1.5rem; right: 1.5rem; background: var(--primario); color: white; }
+        .boton-arriba.mostrar { display: flex; }
+        .boton-arriba:hover { background: var(--secundario); color: #000; }
+        .boton-temas {
+            bottom: 1.5rem;
+            left: 1.5rem;
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            color: var(--texto);
+        }
+        .boton-temas.mostrar { display: flex; }
+        .panel-temas {
+            position: fixed;
+            bottom: 5.2rem;
+            left: 1.5rem;
+            background: var(--fondo-card);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 1rem;
+            display: none;
+            gap: 0.6rem;
+            z-index: 200;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .panel-temas.abierto { display: flex; }
+        .opcion-tema { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--borde); cursor: pointer; }
+        .opcion-tema[data-valor="oscuro"] { background: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        .opcion-tema[data-valor="claro"] { background: linear-gradient(135deg, #6c5ce7, #f2f2f7); }
+        .opcion-tema[data-valor="sangre"] { background: linear-gradient(135deg, #c0392b, #e67e22); }
+        .opcion-tema[data-valor="abismo"] { background: linear-gradient(135deg, #2ecc71, #3498db); }
+        .opcion-tema[data-valor="negro-neon"] { background: linear-gradient(135deg, #ff00ff, #00ffff); }
+        .opcion-tema.seleccionada { border-color: var(--texto); }
     </style>
 </head>
 <body>
+    <a href="#contenido" class="enlace-saltar">Saltar al contenido</a>
     <div id="pantalla-bienvenida" class="pantalla-bienvenida">
         <div class="particulas"></div>
         <div class="bienvenida-contenido">
             <h1>🎮 Krhorkos3DStudioAnd2D</h1>
-            <p class="subtitulo">Desarrollador indie<br> SilentBlock recientemente lanzado</p>
+            <p class="subtitulo">Desarrollador indie<br>SilentBlock recientemente lanzado</p>
             <button class="boton-entrar" onclick="entrarSitio()">Entrar al Sitio</button>
         </div>
     </div>
-
     <nav id="navegacion" class="navegacion">
-        <ul class="nav-lista">
+        <button class="boton-hamburguesa" id="botonMenu" aria-expanded="false" aria-controls="listaNav">☰ Menú</button>
+        <ul class="nav-lista" id="listaNav">
             <li><a href="#juegos" class="nav-enlace">🎮 Juegos</a></li>
+            <li><a href="#sobre-mi" class="nav-enlace">👤 Sobre mí</a></li>
+            <li><a href="#devlog" class="nav-enlace">📰 Devlog</a></li>
             <li><a href="#assets3d" class="nav-enlace">🧊 Assets 3D</a></li>
             <li><a href="#assets2d" class="nav-enlace">🎨 Assets 2D</a></li>
+            <li><a href="#contacto" class="nav-enlace">✉️ Contacto</a></li>
             <li><a href="#redes" class="nav-enlace">🔗 Redes Sociales</a></li>
             <li><a href="#donaciones" class="nav-enlace">❤️ Donaciones</a></li>
+            <li><a href="#personalizacion" class="nav-enlace">🎨 Personalizar</a></li>
             <li><a href="#creditos" class="nav-enlace">⭐ Créditos</a></li>
         </ul>
     </nav>
-
     <main id="contenido" class="contenedor-principal">
-        <!-- SECCIÓN: JUEGOS -->
         <section id="juegos" class="seccion">
             <h2>🎮 Mis Juegos</h2>
-            <div class="cuadricula">
-
-                <!-- AGREGAR MAS JUEGOS AQUI CON EL MISMO CODIGO -------------------------------------------------------------------------------------------------------------------------------------------------->
-                <div class="tarjeta">
-                    <h3>SilentBlock</h3>
-                    <p>Juego de terror psicológico. Encuentra la llave y escapa de la casa.</p>
-                    <a href="https://alex293517.itch.io/silentblock-10" target="_blank" class="boton-descarga">⬇️ Descargar / Ver</a>
-                </div>
-
-
-                
-                <div class="tarjeta">
-                    <h3>Próximamente...</h3>
-                    <p>Nuevos proyectos en desarrollo. ¡Pronto más noticias en itch.io!</p>
-                    <span style="color:gray;">Disponible pronto</span>
-                </div>
-            </div>
+            <div class="cuadricula" id="gridJuegos"></div>
         </section>
-
-        <!-- SECCIÓN: ASSETS 3D -->
+        <section id="sobre-mi" class="seccion">
+            <h2>👤 Sobre mí</h2>
+            <div class="sobre-mi" id="textoSobreMi"></div>
+        </section>
+        <section id="devlog" class="seccion">
+            <h2>📰 Devlog</h2>
+            <div class="filtros-devlog" id="filtrosDevlog"></div>
+            <div class="lista-devlog" id="listaDevlog"></div>
+        </section>
         <section id="assets3d" class="seccion">
             <h2>🧊 Recursos / Assets 3D</h2>
             <div class="cuadricula">
                 <div class="tarjeta">
                     <h3>Modelos 3D — Próximamente</h3>
                     <p>Modelos listos para usar en tus proyectos. Gratis y libres.</p>
-                    <span style="color:gray;">Próximamente</span>
+                    <span style="color:var(--texto-claro);">Próximamente</span>
                 </div>
             </div>
         </section>
-
-        <!-- SECCIÓN: ASSETS 2D -->
         <section id="assets2d" class="seccion">
             <h2>🎨 Recursos / Assets 2D</h2>
             <div class="cuadricula">
                 <div class="tarjeta">
                     <h3>Recursos 2D — Próximamente</h3>
                     <p>Texturas, íconos y gráficos 2D para tus proyectos.</p>
-                    <span style="color:gray;">Próximamente</span>
+                    <span style="color:var(--texto-claro);">Próximamente</span>
                 </div>
             </div>
         </section>
-
-        <!-- ✅ SECCIÓN NUEVA: REDES SOCIALES -->
+        <section id="contacto" class="seccion">
+            <h2>✉️ Contacto</h2>
+            <div class="caja-contacto">
+                <form id="formularioContacto" method="POST">
+                    <div class="campo">
+                        <label for="motivo">Motivo</label>
+                        <select id="motivo" name="motivo" required>
+                            <option value="Contacto directo">Contacto directo</option>
+                            <option value="Colaboración">Colaboración</option>
+                            <option value="Reporte de bug">Reporte de bug</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="campo">
+                        <label for="email">Tu email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="campo">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" required placeholder="Si es un bug, incluye: qué juego, qué pasó y en qué parte del juego estabas."></textarea>
+                    </div>
+                    <button type="submit" class="boton-enviar">Enviar mensaje</button>
+                </form>
+                <div class="atajos-contacto">
+                    <a class="atajo-contacto" data-correo-asunto="Contacto directo" href="#">📧 Escribirme directo</a>
+                    <a class="atajo-contacto" data-correo-asunto="Colaboración" href="#">🤝 Proponer una colaboración</a>
+                    <a class="atajo-contacto" data-correo-asunto="Reporte de bug" href="#">🐞 Reportar un bug</a>
+                </div>
+            </div>
+        </section>
         <section id="redes" class="seccion">
             <h2>🔗 Sígueme en Redes Sociales</h2>
             <div class="caja-redes">
                 <p>¡Sígueme para estar al tanto de novedades, avances y próximos proyectos! 🚀</p>
-                <div class="cuadricula-redes">
-                    <a href="#" target="_blank" class="boton-red">📷 Instagram</a>
-                    <a href="https://alex293517.itch.io" target="_blank" class="boton-red">🎮 Itch.io</a>
-                    <a href="https://github.com/Krhorkos3DStudioAnd2D" target="_blank" class="boton-red">🐙 GitHub</a>
-                    <a href="#" target="_blank" class="boton-red">🐦 X / Twitter</a>
-                    <a href="#" target="_blank" class="boton-red">📺 YouTube</a>
-                    <a href="#" target="_blank" class="boton-red">💬 Discord</a>
-                </div>
+                <div class="cuadricula-redes" id="gridRedes"></div>
             </div>
         </section>
-
-        <!-- SECCIÓN: DONACIONES -->
         <section id="donaciones" class="seccion">
             <h2>❤️ Apóyame / Donaciones</h2>
             <div class="caja-donacion">
                 <h3>Tu apoyo me ayuda a seguir creando 💜</h3>
-                <p>Si disfrutas de mis proyectos y quieres ayudarme a seguir mejorando y creando más contenido, cualquier aportación es infinitamente agradecida. Gracias por creer en mi trabajo.</p>
-                <a href="#" class="boton-donar">💜 Donar aquí</a>
+                <p>Si disfrutas de mis proyectos y quieres ayudarme a seguir mejorando y creando más contenido, cualquier aportación es infinitamente agradecida.</p>
+                <a href="#" id="enlaceDonar" class="boton-donar">💜 Donar aquí</a>
             </div>
         </section>
-
-        <!-- SECCIÓN: CRÉDITOS -->
+        <section id="personalizacion" class="seccion">
+            <h2>🎨 Personalizar Sitio</h2>
+            <div class="caja-personalizacion">
+                <p>Elige el tema de color con el que quieres ver el sitio. Se guarda en tu navegador.</p>
+                <div class="cuadricula-temas" id="cuadriculaTemas"></div>
+            </div>
+        </section>
         <section id="creditos" class="seccion">
             <h2>⭐ Créditos y Agradecimientos</h2>
             <div class="caja-creditos">
                 <p><strong>Krhorkos3DStudioAnd2D</strong> — Un proyecto hecho por una sola persona, con mucho esfuerzo y dedicación.</p>
-                <br>
-                <p>Quiero agradecer de corazón a todas las personas que me han apoyado, de una forma u otra, para que pueda seguir creando. Cada descarga, cada visita y cada palabra de aliento me da fuerzas para continuar.</p>
-                <p>Especialmente a mi familia, por ser mi motor. Y a ti, por estar aquí y ver lo que hago.</p>
-                <br>
-                <p><em>— Hecho con 💜 por Óscar</em></p>
+                <p><em>--- Krhorkos3DStudioAnd2D ---</em></p>
             </div>
         </section>
-
         <footer>
             <p>© 2026 Krhorkos3DStudioAnd2D — Todos los derechos reservados</p>
-            <p style="margin-top:0.5rem; font-size:0.9rem;">Sitio creado por mí, paso a paso, con esfuerzo y cariño.</p>
+            <p style="margin-top:0.5rem; font-size:0.9rem;">Sitio oficial de Krhorkos3DStudioAnd2D.</p>
         </footer>
     </main>
-
+    <button class="boton-arriba" id="botonArriba" aria-label="Volver arriba">↑</button>
+    <button class="boton-temas" id="botonTemas" aria-label="Cambiar tema" aria-expanded="false">🎨</button>
+    <div class="panel-temas" id="panelTemas"></div>
     <script>
+
+        const CONFIG = {
+            correo: "krhorkos3dstudioand2d@gmail.com",
+            formspreeId: "xrpglznl",
+            // ⬇️ PONER MI USUARIO DE GOATCOUNTER AQUÍ
+            goatcounterUsuario: "",
+            // ⬇️ PONER MI ENLACE DE DONACIÓN (KO-FI / PAYPAL) AQUÍ
+            donacionUrl: "",
+            redes: {
+                // ⬇️ PONER MIS ENLACES CUANDO TENGA LAS REDES FALTANTES---------------------------------------------------------------------------------------------------------------------------------------------
+                instagram: "",
+                itch: "https://alex293517.itch.io",
+                github: "https://github.com/Krhorkos3DStudioAnd2D",
+                twitter: "",
+                youtube: "",
+                discord: ""
+            },
+            juegos: [
+                {
+                    nombre: "SilentBlock",
+                    descripcion: "Juego de terror psicológico. Encuentra la llave y escapa de la casa.",
+                    url: "https://alex293517.itch.io/silentblock-10",
+                    // ------------------------------------------------⬇️ PONER ID DE EMBED DE ITCH.IO AQUÍ --------------------------------------------------------------------------------------------------------------
+                    embedId: ""
+                }
+                // ➕ AGREGAR MÁS JUEGOS COPIANDO EL BLOQUE DE ARRIBA
+            ],
+            textoProximamente: "Nuevos proyectos en desarrollo. ¡Pronto más noticias en itch.io!",
+            sobreMi: [
+                "Soy Óscar, desarrollador indie detrás de Krhorkos3DStudioAnd2D. Trabajo solo en cada juego: diseño, programación, arte y sonido, principalmente en Godot 4.",
+                "Hago esto de corazón, con mucho esfuerzo y dedicación. Quizás en un futuro piense en crear también sitios web, es un pensamiento a futuro.",
+                "Cada proyecto que hago le pongo todo mi corazón. Gracias por tu apoyo."
+            ],
+            devlog: [
+                {
+                    fecha: "1 de Septiembre 2026",
+                    categoria: "silentblock",
+                    titulo: "Lanzamiento de SilentBlock",
+                    texto: "SilentBlock ya está disponible en itch.io. Gracias a quienes lo probaron durante el desarrollo."
+                },
+                {
+                    fecha: "Próximamente",
+                    categoria: "general",
+                    titulo: "Nuevo proyecto en camino",
+                    texto: "Estoy empezando un nuevo juego. Iré compartiendo avances aquí antes que en cualquier otro lado.",
+                }
+                // ➕ AGREGA MÁS ENTRADAS DE DEVLOG COPIANDO EL BLOQUE DE ARRIBA
+            ],
+            temas: [
+                { valor: "oscuro", nombre: "Oscuro (original)" },
+                { valor: "claro", nombre: "Claro" },
+                { valor: "sangre", nombre: "Sangre" },
+                { valor: "abismo", nombre: "Abismo" },
+                { valor: "negro-neon", nombre: "Negro Neón" }
+            ]
+        };
+        const ETIQUETAS_REDES = {
+            instagram: "📷 Instagram",
+            itch: "🎮 Itch.io",
+            github: "🐙 GitHub",
+            twitter: "🐦 X / Twitter",
+            youtube: "📺 YouTube",
+            discord: "💬 Discord"
+        };
+        function nombreCategoria(cat) {
+            if (cat === "general") return "General";
+            return cat.charAt(0).toUpperCase() + cat.slice(1);
+        }
+        function renderizarJuegos() {
+            const cont = document.getElementById("gridJuegos");
+            const tarjetas = CONFIG.juegos.map(juego => `
+                <div class="tarjeta">
+                    <h3>${juego.nombre}</h3>
+                    <p>${juego.descripcion}</p>
+                    <a href="${juego.url}" target="_blank" class="boton-descarga">⬇️ Descargar / Ver</a>
+                    ${juego.embedId ? `
+                    <div class="embed-itch">
+                        <iframe frameborder="0" src="https://itch.io/embed/${juego.embedId}?linkback=true" width="100%" height="167" title="Reproductor de itch.io para ${juego.nombre}" loading="lazy"></iframe>
+                    </div>` : ""}
+                </div>
+            `).join("");
+            cont.innerHTML = tarjetas + `
+                <div class="tarjeta">
+                    <h3>Próximamente...</h3>
+                    <p>${CONFIG.textoProximamente}</p>
+                    <span style="color:var(--texto-claro);">Disponible pronto</span>
+                </div>`;
+        }
+        function renderizarRedes() {
+            const cont = document.getElementById("gridRedes");
+            cont.innerHTML = Object.entries(CONFIG.redes)
+                .filter(([, url]) => url)
+                .map(([clave, url]) => `<a href="${url}" target="_blank" class="boton-red">${ETIQUETAS_REDES[clave] || clave}</a>`)
+                .join("");
+        }
+        function renderizarSobreMi() {
+            document.getElementById("textoSobreMi").innerHTML =
+                CONFIG.sobreMi.map(p => `<p style="margin-bottom:1rem;">${p}</p>`).join("");
+        }
+        function renderizarFiltrosDevlog() {
+            const categorias = ["todos", ...new Set(CONFIG.devlog.map(e => e.categoria))];
+            document.getElementById("filtrosDevlog").innerHTML = categorias.map((cat, i) => `
+                <button class="boton-filtro ${i === 0 ? "activo" : ""}" data-filtro="${cat}">
+                    ${cat === "todos" ? "Todos" : nombreCategoria(cat)}
+                </button>
+            `).join("");
+        }
+        function renderizarDevlog(filtro) {
+            const entradas = CONFIG.devlog.filter(e => filtro === "todos" || e.categoria === filtro);
+            document.getElementById("listaDevlog").innerHTML = entradas.map(e => `
+                <article class="entrada-devlog">
+                    <div class="encabezado-devlog">
+                        <h3>${e.titulo}</h3>
+                        <span class="etiqueta-devlog">${nombreCategoria(e.categoria)}</span>
+                    </div>
+                    <span class="fecha-devlog">${e.fecha}</span>
+                    <p style="margin-top:0.5rem;">${e.texto}</p>
+                </article>
+            `).join("") || `<p style="color:var(--texto-claro);">Todavía no hay entradas en esta categoría.</p>`;
+        }
+        function configurarContacto() {
+            document.querySelectorAll("[data-correo-asunto]").forEach(enlace => {
+                enlace.href = `mailto:${CONFIG.correo}?subject=${encodeURIComponent(enlace.dataset.correoAsunto)}`;
+            });
+            document.getElementById("formularioContacto").action = `https://formspree.io/f/${CONFIG.formspreeId}`;
+        }
+        function configurarDonacion() {
+            document.getElementById("enlaceDonar").href = CONFIG.donacionUrl;
+        }
+        function cargarAnalitica() {
+            if (!CONFIG.goatcounterUsuario) return;
+            const script = document.createElement("script");
+            script.async = true;
+            script.src = "//gc.zgo.at/count.js";
+            script.setAttribute("data-goatcounter", `https://${CONFIG.goatcounterUsuario}.goatcounter.com/count`);
+            document.head.appendChild(script);
+        }
+        function aplicarTema(valor) {
+            document.documentElement.setAttribute("data-tema", valor);
+            localStorage.setItem("tema-sitio", valor);
+            document.querySelectorAll(".opcion-tema").forEach(o => o.classList.toggle("seleccionada", o.dataset.valor === valor));
+            document.querySelectorAll(".tarjeta-tema").forEach(t => t.classList.toggle("seleccionado", t.dataset.valor === valor));
+        }
+        function renderizarTemas() {
+            document.getElementById("panelTemas").innerHTML = CONFIG.temas.map(t =>
+                `<button class="opcion-tema" data-valor="${t.valor}" title="${t.nombre}"></button>`
+            ).join("");
+            document.getElementById("cuadriculaTemas").innerHTML = CONFIG.temas.map(t => `
+                <div class="tarjeta-tema" data-valor="${t.valor}">
+                    <div class="muestra-tema"></div>
+                    <span>${t.nombre}</span>
+                </div>
+            `).join("");
+        }
+        function iniciarTemas() {
+            renderizarTemas();
+            aplicarTema(localStorage.getItem("tema-sitio") || "oscuro");
+            document.getElementById("panelTemas").addEventListener("click", (e) => {
+                const boton = e.target.closest(".opcion-tema");
+                if (boton) aplicarTema(boton.dataset.valor);
+            });
+            document.getElementById("cuadriculaTemas").addEventListener("click", (e) => {
+                const tarjeta = e.target.closest(".tarjeta-tema");
+                if (tarjeta) aplicarTema(tarjeta.dataset.valor);
+            });
+            const botonTemas = document.getElementById("botonTemas");
+            botonTemas.addEventListener("click", () => {
+                const abierto = document.getElementById("panelTemas").classList.toggle("abierto");
+                botonTemas.setAttribute("aria-expanded", abierto);
+            });
+        }
         function entrarSitio() {
             document.getElementById("pantalla-bienvenida").classList.add("oculto");
             document.getElementById("navegacion").classList.add("mostrar");
             document.getElementById("contenido").classList.add("mostrar");
+            document.getElementById("botonTemas").classList.add("mostrar");
             window.scrollTo(0, 0);
+            renderizarDevlog("todos");
+            iniciarObservadores();
         }
+        function iniciarMenuMovil() {
+            const botonMenu = document.getElementById("botonMenu");
+            const listaNav = document.getElementById("listaNav");
+            botonMenu.addEventListener("click", () => {
+                const abierto = listaNav.classList.toggle("abierto");
+                botonMenu.setAttribute("aria-expanded", abierto);
+            });
+            listaNav.querySelectorAll(".nav-enlace").forEach(enlace => {
+                enlace.addEventListener("click", () => {
+                    listaNav.classList.remove("abierto");
+                    botonMenu.setAttribute("aria-expanded", "false");
+                });
+            });
+        }
+        function iniciarBotonArriba() {
+            const botonArriba = document.getElementById("botonArriba");
+            window.addEventListener("scroll", () => {
+                botonArriba.classList.toggle("mostrar", window.scrollY > 500);
+            });
+            botonArriba.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+        }
+        function iniciarObservadores() {
+            const secciones = document.querySelectorAll(".seccion");
+            const enlacesNav = document.querySelectorAll(".nav-enlace");
+            const observadorAparicion = new IntersectionObserver((entradas) => {
+                entradas.forEach(entrada => { if (entrada.isIntersecting) entrada.target.classList.add("visible"); });
+            }, { threshold: 0.15 });
+            secciones.forEach(s => observadorAparicion.observe(s));
+            const observadorActivo = new IntersectionObserver((entradas) => {
+                entradas.forEach(entrada => {
+                    if (entrada.isIntersecting) {
+                        enlacesNav.forEach(e => e.classList.remove("activo"));
+                        const activo = document.querySelector(`.nav-enlace[href="#${entrada.target.id}"]`);
+                        if (activo) activo.classList.add("activo");
+                    }
+                });
+            }, { threshold: 0.5 });
+            secciones.forEach(s => observadorActivo.observe(s));
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            renderizarJuegos();
+            renderizarRedes();
+            renderizarSobreMi();
+            renderizarFiltrosDevlog();
+            configurarContacto();
+            configurarDonacion();
+            cargarAnalitica();
+            iniciarTemas();
+            iniciarMenuMovil();
+            iniciarBotonArriba();
+            document.getElementById("filtrosDevlog").addEventListener("click", (e) => {
+                const boton = e.target.closest(".boton-filtro");
+                if (!boton) return;
+                document.querySelectorAll(".boton-filtro").forEach(b => b.classList.remove("activo"));
+                boton.classList.add("activo");
+                renderizarDevlog(boton.dataset.filtro);
+            });
+        });
     </script>
 </body>
 </html>
